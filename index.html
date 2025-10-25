@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cute Message Sequence</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash">
+    <h1>💌 A Message Just for You 💌</h1>
+    <button id="startBtn">Click to Begin</button>
+  </div>
+
+  <!-- Main Content -->
+  <div id="mainContent" style="display: none;">
+    <div id="message">Hello 🐼</div>
+    <img id="messageImg" src="images/1st.jpg" alt="Cute image" />
+    <br />
+    <button id="nextBtn">Read More 💌</button>
+    <button id="noBtn" style="display: none;">No</button>
+    <button id="yesBtn" style="display: none;">Yes</button>
+    <button id="newBtn" style="display: none;">What’s New? 🌟</button>
+    <div id="replyForm" style="display: none;">
+  <input type="text" placeholder="Your reply..." />
+  <button id="sendBtn">Send 💌</button>
+  <div id="thankYou" style="display: none;">Thanks for replying! 💖</div>
+  <div id="userReply" style="display: none;"></div> <!-- 👈 This shows the reply -->
+</div>
+
+  <!-- Effects -->
+  <div id="heartBurst">💖</div>
+  <div id="screenFlash"></div>
+  <div id="heartGlow">💖</div>
+  <div id="heartParticles"></div>
+
+  <script>
+    const splash = document.getElementById('splash');
+    const startBtn = document.getElementById('startBtn');
+    const mainContent = document.getElementById('mainContent');
+    const messageDiv = document.getElementById('message');
+    const messageImg = document.getElementById('messageImg');
+    const nextBtn = document.getElementById('nextBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const newBtn = document.getElementById('newBtn');
+    const heart = document.getElementById('heartBurst');
+    const flash = document.getElementById('screenFlash');
+    const heartGlow = document.getElementById('heartGlow');
+    const heartParticles = document.getElementById('heartParticles');
+    const replyForm = document.getElementById('replyForm');
+    const sendBtn = document.getElementById('sendBtn');
+    const thankYou = document.getElementById('thankYou');
+
+    let step = 0;
+
+    const messages = [
+      "Hello 🐼",
+      "Hey, I want to tell you something 🐱",
+      "I missed you a lot! 💕",
+      "Do you even love me?! 🌟"
+    ];
+
+    const images = [
+      "images/1st.jpg",
+      "images/2nd.jpg",
+      "images/3rd.jpg",
+      "images/3rd.jpg"
+    ];
+
+    startBtn.addEventListener('click', () => {
+      splash.style.display = 'none';
+      mainContent.style.display = 'block';
+      typeMessage(messages[0], messageDiv);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      step++;
+      if (step < messages.length) {
+        typeMessage(messages[step], messageDiv);
+
+        if (step < 3) {
+          messageImg.style.opacity = 0;
+          setTimeout(() => {
+            messageImg.src = images[step];
+            messageImg.style.opacity = 1;
+          }, 300);
+        }
+      }
+
+      if (step === messages.length - 1) {
+        nextBtn.style.display = 'none';
+        yesBtn.style.display = 'inline';
+        noBtn.style.display = 'inline';
+      }
+    });
+
+    yesBtn.addEventListener('click', () => {
+      typeMessage("Then why you didn't message me? 🥺", messageDiv);
+      messageImg.style.opacity = 0;
+      setTimeout(() => {
+        messageImg.src = "images/5th.jpg";
+        messageImg.style.opacity = 1;
+      }, 300);
+
+      heart.style.display = 'block';
+      setTimeout(() => {
+        heart.style.display = 'none';
+      }, 1000);
+
+      flash.style.opacity = 1;
+      setTimeout(() => {
+        flash.style.opacity = 0;
+      }, 300);
+
+      heartGlow.style.animation = 'heartPulse 1.5s ease-out';
+      setTimeout(() => {
+        heartGlow.style.animation = 'none';
+      }, 1500);
+
+      burstHearts();
+
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+      newBtn.style.display = 'inline';
+    });
+
+    noBtn.addEventListener('click', () => {
+      typeMessage("Goodbye! 👋", messageDiv);
+      messageImg.src = "images/4th.jpg";
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+    });
+
+    newBtn.addEventListener('click', () => {
+      typeMessage("ohh you said yes! 💖 Sending you a virtual hug 🫂", messageDiv);
+      messageImg.style.opacity = 0;
+      setTimeout(() => {
+        messageImg.src = "images/6th.jpg";
+        messageImg.style.opacity = 1;
+      }, 300);
+      newBtn.style.display = 'none';
+      replyForm.style.display = 'block';
+    });
+
+    sendBtn.addEventListener('click', () => {
+      replyForm.style.display = 'none';
+      thankYou.style.display = 'block';
+    });
+
+    function typeMessage(text, element) {
+      element.textContent = '';
+      let i = 0;
+      const interval = setInterval(() => {
+        element.textContent += text[i];
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, 50);
+    }
+
+    function burstHearts() {
+      for (let i = 0; i < 80; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'heartDot';
+        dot.style.left = Math.random() * 100 + 'vw';
+        dot.style.top = Math.random() * 100 + 'vh';
+        dot.style.animationDuration = (1 + Math.random()) + 's';
+        heartParticles.appendChild(dot);
+
+        setTimeout(() => {
+          heartParticles.removeChild(dot);
+        }, 2000);
+      }
+    }
+    sendBtn.addEventListener('click', () => {
+  const replyInput = replyForm.querySelector('input');
+  const replyText = replyInput.value.trim();
+
+  if (replyText !== "") {
+    replyForm.style.display = 'none';
+    thankYou.style.display = 'block';
+
+    const userReply = document.getElementById('userReply');
+    userReply.textContent = `You said: "${replyText}" 💕`;
+    userReply.style.display = 'block';
+  }
+});
+  </script>
+</body>
+</html>
