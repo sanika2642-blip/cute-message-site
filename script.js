@@ -76,7 +76,7 @@ yesBtn.addEventListener('click', () => {
 
 noBtn.addEventListener('click', () => {
   // Show goodbye message with the "4th" image, no hearts!
-  typeMessage("Goodbye! 👋<br><span style='font-size:1.2em;'>Hope you will change your mindsoon.</span>");
+  typeMessage("Goodbye! 👋<br><span style='font-size:1.2em;'>Hope you will change your mind soon.</span>");
   messageImg.src = "images/4th.jpg";
   messageImg.classList.remove("hide-img");
   yesBtn.style.display = 'none';
