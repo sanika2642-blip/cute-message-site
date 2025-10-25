@@ -88,3 +88,18 @@ button:hover {
   font-size: 20px;
   color: #ff6eaf;
 }
+.bubbly {
+  color: #6EC1E4; /* Soft sky blue */
+  background-color: #E3F6FF;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-size: 1.3em;
+  font-weight: bold;
+  display: inline-block;
+  animation: popIn 0.6s ease-out;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}

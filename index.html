@@ -10,7 +10,8 @@
   <!-- Splash Screen -->
   <div id="splash">
     <h1>💌 A Message Just for You 💌</h1>
-    <button id="startBtn">Click to Begin</button>
+    <p>Scan this to open it anywhere:</p>
+<img src="images/qr.png" alt="QR Code" style="max-width: 200px; margin: 10px auto; display: block;" />    <button id="startBtn">Click to Begin</button>
   </div>
 
   <!-- Main Content -->
@@ -22,18 +23,20 @@
     <button id="noBtn" style="display: none;">No</button>
     <button id="yesBtn" style="display: none;">Yes</button>
     <button id="newBtn" style="display: none;">What’s New? 🌟</button>
-    <div id="replyForm" style="display: none;">
-  <input type="text" placeholder="Your reply..." />
-  <button id="sendBtn">Send 💌</button>
-  <div id="thankYou" style="display: none;">Thanks for replying! 💖</div>
-  <div id="userReply" style="display: none;"></div> <!-- 👈 This shows the reply -->
-</div>
 
-  <!-- Effects -->
-  <div id="heartBurst">💖</div>
-  <div id="screenFlash"></div>
-  <div id="heartGlow">💖</div>
-  <div id="heartParticles"></div>
+    <div id="replyForm" style="display: none;">
+      <input type="text" placeholder="Your reply..." />
+      <button id="sendBtn">Send 💌</button>
+      <div id="thankYou" style="display: none;">Thanks for replying! 💖</div>
+      <div id="userReply" style="display: none;"></div>
+    </div>
+
+    <!-- Effects -->
+    <div id="heartBurst">💖</div>
+    <div id="screenFlash"></div>
+    <div id="heartGlow">💖</div>
+    <div id="heartParticles"></div>
+  </div>
 
   <script>
     const splash = document.getElementById('splash');
@@ -52,13 +55,14 @@
     const replyForm = document.getElementById('replyForm');
     const sendBtn = document.getElementById('sendBtn');
     const thankYou = document.getElementById('thankYou');
+    const userReply = document.getElementById('userReply');
 
     let step = 0;
 
     const messages = [
       "🐼",
       "Hey, I want to tell you something 👉🏻👈🏻",
-      "I missed you a lot! 🫠",
+      "I missed you a lot! 🥺",
       "Do you even love me?! 🌟"
     ];
 
@@ -97,7 +101,7 @@
     });
 
     yesBtn.addEventListener('click', () => {
-      typeMessage("Then why No text? 🥺", messageDiv);
+      typeMessage("Then No text? 🙄", messageDiv);
       messageImg.style.opacity = 0;
       setTimeout(() => {
         messageImg.src = "images/5th.jpg";
@@ -145,18 +149,24 @@
     });
 
     sendBtn.addEventListener('click', () => {
-      replyForm.style.display = 'none';
-      thankYou.style.display = 'block';
+      const replyInput = replyForm.querySelector('input');
+      const replyText = replyInput.value.trim();
+
+      if (replyText !== "") {
+        replyForm.style.display = 'none';
+        thankYou.style.display = 'block';
+
+        userReply.textContent = `You said: "${replyText}" 💕`;
+        userReply.style.display = 'block';
+
+        setTimeout(() => {
+          typeMessage("Bye for now 💌 Text me soon, okay?", messageDiv);
+        }, 1000);
+      }
     });
 
     function typeMessage(text, element) {
-      element.textContent = '';
-      let i = 0;
-      const interval = setInterval(() => {
-        element.textContent += text[i];
-        i++;
-        if (i >= text.length) clearInterval(interval);
-      }, 50);
+      element.innerHTML = `<span class="bubbly">${text}</span>`;
     }
 
     function burstHearts() {
@@ -173,19 +183,6 @@
         }, 2000);
       }
     }
-    sendBtn.addEventListener('click', () => {
-  const replyInput = replyForm.querySelector('input');
-  const replyText = replyInput.value.trim();
-
-  if (replyText !== "") {
-    replyForm.style.display = 'none';
-    thankYou.style.display = 'block';
-
-    const userReply = document.getElementById('userReply');
-    userReply.textContent = `You said: "${replyText}" 💕`;
-    userReply.style.display = 'block';
-  }
-});
   </script>
 </body>
 </html>
