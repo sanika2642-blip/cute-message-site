@@ -75,13 +75,15 @@ yesBtn.addEventListener('click', () => {
 });
 
 noBtn.addEventListener('click', () => {
-  // Hide image and show animated "bye" emoji + friendly message!
-  typeMessage("Goodbye! 👋<br><span style='font-size:1.5em;'>Come back soon for more cute messages!</span>");
-  messageImg.classList.add("hide-img");
+  // Show goodbye message with the "4th" image, no hearts!
+  typeMessage("Goodbye! 👋<br><span style='font-size:1.2em;'>Hope you will change your mindsoon.</span>");
+  messageImg.src = "images/4th.jpg";
+  messageImg.classList.remove("hide-img");
   yesBtn.style.display = 'none';
   noBtn.style.display = 'none';
-  releaseHearts(8);
+  // No releaseHearts() or heart splash here!
 });
+
 
 newBtn.addEventListener('click', () => {
   typeMessage("ohh you said yes! 💖 Sending you a virtual hug 🫂");
