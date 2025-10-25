@@ -4,23 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cute Message Sequence 💌</title>
-  <meta name="description" content="An interactive, accessible and adorable message website built with HTML, CSS, and JavaScript. 💖" />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="description" content="An interactive and adorable message website built with HTML, CSS, and JavaScript. 💖" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="images/heart.png">
+  <link rel="icon" href="images/heart.png" />
 </head>
+
 <body>
+  <!-- Splash / Intro Section -->
   <header id="splash" aria-label="Welcome screen">
     <h1>💌 A Message Just for You 💌</h1>
     <button id="startBtn" role="button" aria-label="Start the cute message sequence">Click to Begin</button>
   </header>
+
+  <!-- Main Interactive Section -->
   <main id="mainContent" style="display:none;">
     <section id="messageSection" aria-live="polite" aria-label="Message area">
       <article>
-        <div id="message" class="bubbly"><span id="typing"></span><span id="cursor" aria-hidden="true"></span></div>
+        <div id="message" class="bubbly">🐼</div>
         <figure>
-          <img id="messageImg" src="images/1st.jpg" alt="Cute first image">
-          <figcaption class="visually-hidden">Adorable message image</figcaption>
+          <img id="messageImg" src="images/1st.jpg" alt="Cute first image" />
+          <figcaption>Adorable message image</figcaption>
         </figure>
         <nav id="controls">
           <button id="nextBtn" class="btn">Read More 💌</button>
@@ -37,7 +40,11 @@
       <p id="thankYou" style="display:none;">Thanks for replying! 💖</p>
       <p id="userReply" style="display:none;"></p>
     </section>
-    <div id="floatingHearts" aria-hidden="true"></div>
+    <!-- Visual effects layers -->
+    <div id="heartBurst" aria-hidden="true"></div>
+    <div id="screenFlash" aria-hidden="true"></div>
+    <div id="heartGlow" aria-hidden="true"></div>
+    <div id="heartParticles" aria-hidden="true"></div>
   </main>
   <noscript>
     <p>This interactive website needs JavaScript enabled to display the messages 💕</p>
@@ -46,6 +53,5 @@
     <p>Made with 💕 by Sanika | <a href="https://github.com/sanika2642-blip/cute-message-site">View on GitHub</a></p>
   </footer>
   <script src="script.js"></script>
-  <script src="js/script.js"></script>
 </body>
 </html>
